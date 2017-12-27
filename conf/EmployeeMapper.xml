@@ -5,8 +5,14 @@
 <mapper namespace="com.mybatis.dao.EmployeeMapper">
 	<!-- namespace:名称空间;指定为接口的全类名 id：唯一标识 resultType：返回值类型 #{id}：从传递过来的参数中取出id值 
 		public Employee getEmpById(Integer id); -->
+		
+<!-- 	解决办法一: 通过在查询的sql语句中定义字段名的别名，
+		让字段名的别名和实体类的属性名一致，这样就可以表的字段名和实体类的属性名一一对应上了，
+		这种方式是通过在sql语句中定义别名来解决字段名和属性名的映射关系的。 -->
+
+<!-- 　　解决办法二: 通过<resultMap>来映射字段名和实体类属性名的一一对应关系。
+		这种方式是使用MyBatis提供的解决方式来解决字段名和属性名的映射关系的。 -->
 	<select id="getEmpById" resultType="com.mybatis.bean.Employee">
-		select id,last_name
-		lastName,email,gender from employee where id = #{id}
+		select id,last_name lastName,email,gender from employee where id = #{id}
 	</select>
 </mapper>

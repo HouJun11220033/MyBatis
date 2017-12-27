@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
 import com.mybatis.bean.Employee;
+import com.mybatis.dao.EmployeeMapper;
 
 public class HelloMyBatis {
 
@@ -25,10 +26,27 @@ public class HelloMyBatis {
 		SqlSession openSession = sqlSessionFactory.openSession();
 		try {
 			Employee employee = openSession.selectOne("com.mybatis.dao.EmployeeMapper.getEmpById", 1);
-			System.out.println(employee);
+		//	System.out.println(employee);
 		} finally {
 			openSession.close();
 		}
+	}
+	
+	
+	
+	@Test
+	public void test2() throws IOException{
+		SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		try {
+			EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+			Employee employee = employeeMapper.getEmpById(1);
+			System.out.println(employee);
+		} finally {
+			sqlSession.close();
+		}
+		
 	}
 
 }
